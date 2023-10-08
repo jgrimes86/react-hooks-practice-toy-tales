@@ -48,7 +48,20 @@ function App() {
     .then(response => response.json())
     .then(() => fetchToys())
   }
-  console.log(toyArray)
+
+  function likeToy(toy) {
+    const newLikes = toy.likes+1;
+    
+    fetch(toyDatabase+"/"+toy.id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({likes: newLikes})
+    })
+    .then(response => response.json())
+    .then(() => fetchToys())
+  }
 
   return (
     <>
@@ -57,7 +70,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toyArray={toyArray} donateToy={donateToy} />
+      <ToyContainer toyArray={toyArray} donateToy={donateToy} likeToy={likeToy} />
     </>
   );
 }
