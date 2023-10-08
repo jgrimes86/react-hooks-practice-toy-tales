@@ -22,10 +22,25 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  function addNewToy(formData) {
+    const newToy = {
+      ...formData,
+      likes: 0
+    }
+    fetch(toyDatabase, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newToy)
+    })
+    fetchToys()
+  }
+
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm addNewToy={addNewToy} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
