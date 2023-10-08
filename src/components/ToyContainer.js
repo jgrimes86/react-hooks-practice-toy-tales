@@ -1,10 +1,10 @@
 import React from "react";
 import ToyCard from "./ToyCard";
 
-function ToyContainer({toyArray}) {
+function ToyContainer({toyArray, donateToy}) {
 
   const toyDisplay = toyArray.map((toy) => {
-    return <ToyCard key={toy.id} toy={toy} />
+    return <ToyCard key={toy.id} toy={toy} donateToy={donateToy} />
   })
 
   return (

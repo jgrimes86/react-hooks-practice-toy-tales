@@ -1,7 +1,11 @@
 import React from "react";
 
-function ToyCard({toy}) {
+function ToyCard({toy, donateToy}) {
   const {name, image, likes} = toy;
+
+  function handleClick() {
+    donateToy(toy)
+  }
 
   return (
     <div className="card">
@@ -13,7 +17,7 @@ function ToyCard({toy}) {
       />
       <p>{likes} Likes </p>
       <button className="like-btn">Like {"<3"}</button>
-      <button className="del-btn">Donate to GoodWill</button>
+      <button className="del-btn" onClick={handleClick}>Donate to GoodWill</button>
     </div>
   );
 }

@@ -34,8 +34,21 @@ function App() {
       },
       body: JSON.stringify(newToy)
     })
-    fetchToys()
+    .then(response => response.json())
+    .then(() => fetchToys())
   }
+
+  function donateToy(toy) {
+    fetch(toyDatabase+"/"+toy.id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(() => fetchToys())
+  }
+  console.log(toyArray)
 
   return (
     <>
@@ -44,7 +57,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toyArray={toyArray} />
+      <ToyContainer toyArray={toyArray} donateToy={donateToy} />
     </>
   );
 }
